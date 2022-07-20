@@ -60,17 +60,15 @@ class helper:
             pool.close()
         else:
             for file_path in file_list:
-                self.convert_pdf(
-                    file_path, self.img_data_path, img_type, resolution=resolution
-                )
+                self.convert_pdf(file_path, img_type, resolution)
         print(f"Last file completed in {time.time() - start_time} seconds")
 
-    def convert_pdf(self, file_path, output_dir, img_type, resolution):
+    def convert_pdf(self, file_path, img_type, resolution):
         """
         Converts each page of a pdf to a separate png image
         """
         file_name = os.path.basename(file_path).split(".")[0]
-
+        output_dir = self.img_data_path
         # execute Ghostscript command, print results
         subprocess.run(
             [
@@ -89,7 +87,7 @@ class helper:
         file_path, img_type, resolution = args
         self.convert_pdf(
             file_path=file_path,
-            output_dir=self.img_data_path,
+            # output_dir=self.img_data_path,
             img_type=img_type,
             resolution=resolution,
         )
